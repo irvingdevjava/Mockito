@@ -41,10 +41,6 @@ public class Player {
     }
     @Override
     public String toString() {
-        return "Player {Id=" +
-                         Id + "name=" +
-                         name + "team=" + 
-                         team + "position=" + 
-                         position + "}";
+        return "Player [Id=" + Id + ", name=" + name + ", team=" + team + ", position=" + position + "]";
     }
 }
