@@ -1,17 +1,31 @@
 package org.mock;
 
+import org.mock.Service.PlayerServiceImpl;
+import org.mock.persistence.entity.Player;
+import org.mock.persistence.repository.PlayerRepositoryImpl;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        PlayerRepositoryImpl playerRepositoryImpl=new PlayerRepositoryImpl();
+
+        PlayerServiceImpl playerServiceImpl=new PlayerServiceImpl(playerRepositoryImpl);
+
+        // playerServiceImpl.deleteById(1L);
+
+        // System.out.println(playerServiceImpl.findAll());
+
+        Player player=new Player();
+        
+        player.setId(7L);
+        player.setName("Joancho");
+        player.setTeam("Carroñeros");
+        player.setPosition("Recoge balones");
+
+        playerServiceImpl.save(player);
+
+        System.out.println(playerServiceImpl.findById(7L));
     }
 }
