@@ -16,4 +16,10 @@ public class DataProvider {
             new Player(6L, "Virgil van Dijk", "Liverpool", "Defensa")
     );
     }
+
+    public static Player MockPlayer(){
+        return new Player(1L, "Cristiano Ronaldo", "Al Nassr", "Delantero");
+    }
+
+    
 }
