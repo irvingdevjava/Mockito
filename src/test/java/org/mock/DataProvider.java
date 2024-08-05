@@ -21,5 +21,7 @@ public class DataProvider {
         return new Player(1L, "Cristiano Ronaldo", "Al Nassr", "Delantero");
     }
 
-    
+    public static Player MockAddPlayer(){
+        return new Player(7L, "Juan","San Juan", "Portero" );
+   }
 }
