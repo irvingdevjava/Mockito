@@ -1,6 +1,7 @@
 package org.mock.Service;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.*;
 
 import java.util.List;
@@ -41,7 +42,24 @@ public class IPlayerServiceTest {
         verify(this.playerRepository).findAll();
     }
 
-    
+    @Test
+    public void testFindById() {
+        // Given
+        Long id=1L;
+
+        // When
+        when(playerRepository.findById(anyLong())).thenReturn(DataProvider.MockPlayer());
+        Player player = playerRepository.findById(id);
+
+        // Then
+        assertEquals("Cristiano Ronaldo", player.getName());
+        assertNotNull(player);
+        assertEquals("Al Nassr", player.getTeam());
+        assertEquals("Delantero", player.getPosition());
+        assertEquals(Long.valueOf(1L), player.getId());
+        verify(this.playerRepository, times(1)).findById(anyLong());
+
+    }
 
     
         
