@@ -11,6 +11,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mock.DataProvider;
 import org.mock.persistence.entity.Player;
 import org.mock.persistence.repository.PlayerRepositoryImpl;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,8 +27,6 @@ public class IPlayerServiceTest {
 
     @Test
     public void testFindAll() {
-        // MockitoAnnotations.openMocks(this);
-
         // Given
         when(playerRepository.findAll()).thenReturn(DataProvider.playerListMock());
         // When
@@ -61,11 +60,21 @@ public class IPlayerServiceTest {
 
     }
 
-    
-        
+    @Test
+    public void testSave() {
+        // Given
+        Player player=DataProvider.MockAddPlayer();
 
-    
-
+        // When
+        this.playerServiceImpl.save(player);
+        // Then
+        ArgumentCaptor<Player> playerArgumentCaptor=ArgumentCaptor.forClass(Player.class);
+        verify(this.playerRepository).save(playerArgumentCaptor.capture());
+        assertEquals(7L, playerArgumentCaptor.getValue().getId());
+        assertEquals("Juan", playerArgumentCaptor.getValue().getName());
+        assertEquals("San Juan", playerArgumentCaptor.getValue().getTeam());
+        assertEquals("Portero", playerArgumentCaptor.getValue().getPosition());
+    }
 }
 
 
